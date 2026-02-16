@@ -51,18 +51,30 @@ macro_rules! try_extract_matches {
 #[macro_export]
 macro_rules! extract_matches {
     ($e:expr, $variant:path) => {
+        $crate::extract_matches!(@impl $e, $variant,)
+    };
+    ($e:expr, $variant:path, $($arg:tt)+) => {
+        $crate::extract_matches!(@impl $e, $variant, $($arg)+)
+    };
+    (@impl $e:expr, $variant:path, $($arg:tt)*) => {
         match $e {
             $variant(x) => x,
-            ref e => {
-                panic!("Variant extract failed: `{:?}` is not of variant `{}`", e, stringify!($variant))
-            }
+            ref e => $crate::extract_matches!(@panic e, $variant, $($arg)*),
         }
     };
-    ( $e:expr , $variant:path , $($arg:tt)* ) => {
-        match $e {
-            $variant(x) => x,
-            ref e => panic!("Variant extract failed: `{:?}` is not of variant `{}`: {}",
-                e, stringify!($variant), format_args!($($arg)*))
-        }
+    (@panic $e:expr, $variant:path,) => {
+        panic!(
+            "Variant extract failed: `{:?}` is not of variant `{}`",
+            $e,
+            stringify!($variant)
+        )
+    };
+    (@panic $e:expr, $variant:path, $($arg:tt)+) => {
+        panic!(
+            "Variant extract failed: `{:?}` is not of variant `{}`: {}",
+            $e,
+            stringify!($variant),
+            format_args!($($arg)+)
+        )
     };
 }
