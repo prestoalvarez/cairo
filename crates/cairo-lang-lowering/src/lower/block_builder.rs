@@ -372,9 +372,8 @@ impl<'db> BlockBuilder<'db> {
                 .eq(inputs.iter().map(|var_usage| &ctx.variables[var_usage.var_id].ty))
         );
 
-        let var_usage =
-            generators::StructConstruct { inputs: inputs.clone(), ty: expr.ty, location }
-                .add(ctx, &mut self.statements);
+        let var_usage = generators::StructConstruct { inputs, ty: expr.ty, location }
+            .add(ctx, &mut self.statements);
 
         (var_usage, ClosureInfo { members, snapshots })
     }
