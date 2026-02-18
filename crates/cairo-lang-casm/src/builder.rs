@@ -617,23 +617,23 @@ impl CasmBuilder {
         self.reachable = false;
     }
 
-    /// Returns `var`s value, with fixed ap if `adjust_ap` is true.
+    /// Returns `var`s value with AP change applied.
     pub fn get_adjusted(&self, var: Var) -> CellExpression {
         self.main_state.get_adjusted(var)
     }
 
-    /// Returns `var`s value, with fixed ap if `adjust_ap` is true.
+    /// Returns `var`s value without applying AP change.
     pub fn get_unadjusted(&self, var: Var) -> &CellExpression {
         self.main_state.get_unadjusted(var)
     }
 
-    /// Returns `var`s value as a cell reference, with fixed ap if `adjust_ap` is true.
+    /// Returns `var`s value as a cell reference with AP change applied.
     fn as_adjusted_cell_ref(&self, var: Var) -> CellRef {
         extract_matches!(self.main_state.get_unadjusted(var), CellExpression::Deref)
             .unchecked_apply_known_ap_change(self.main_state.ap_change)
     }
 
-    /// Returns `var`s value as a cell reference or immediate, with fixed ap if `adjust_ap` is true.
+    /// Returns `var`s value as a cell reference or immediate without applying AP change.
     fn as_unadjusted_deref_or_imm(&self, var: Var) -> DerefOrImmediate {
         match self.get_unadjusted(var) {
             CellExpression::Deref(cell) => DerefOrImmediate::Deref(*cell),
@@ -644,8 +644,8 @@ impl CasmBuilder {
         }
     }
 
-    /// Returns `var`s value as a cell reference plus a small const offset, with fixed ap if
-    /// `adjust_ap` is true.
+    /// Returns `var`s value as a cell reference plus a small const offset without applying AP
+    /// change.
     fn as_unadjusted_cell_ref_plus_const(
         &self,
         var: Var,
