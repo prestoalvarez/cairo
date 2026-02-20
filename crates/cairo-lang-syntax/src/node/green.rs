@@ -18,7 +18,7 @@ pub struct GreenNode<'a> {
     pub details: GreenNodeDetails<'a>,
 }
 impl<'a> GreenNode<'a> {
-    pub fn width(&self, db: &'a dyn Database) -> TextWidth {
+    pub fn width(&self, db: &dyn Database) -> TextWidth {
         match &self.details {
             GreenNodeDetails::Token(text) => TextWidth::from_str(text.long(db)),
             GreenNodeDetails::Node { width, .. } => *width,
