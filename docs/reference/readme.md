@@ -16,7 +16,7 @@ Install an AsciiDoc plugin for your IDE:
 * **VS Code**: *AsciiDoc by asciidoctor*
 * **IntelliJ IDEA**: *AsciiDoc Plugin*
 
-After installing the plugin, open any `.adoc` file in `cairo/docs/reference`.
+After installing the plugin, open any `.adoc` file in `docs/reference/src/components/cairo/modules`.
 
 ---
 
@@ -38,18 +38,18 @@ sudo apt-get install asciidoctor
 
 ### Convert to HTML
 
-> **Tip:** run the commands from `cairo/docs/reference`
+> **Tip:** run the commands from `docs/reference` (from the repo root)
 
 **Convert a single file:**
 
 ```bash
-asciidoctor src/Summary.adoc
+asciidoctor src/components/cairo/modules/ROOT/pages/index.adoc
 ```
 
 **Convert all `.adoc` files:**
 
 ```bash
-asciidoctor src/*.adoc
+find src/components/cairo/modules -path '*/pages/*.adoc' -print0 | xargs -0 asciidoctor
 ```
 
 HTML files will be created in the same directory as the source files.
@@ -78,18 +78,18 @@ sudo gem install asciidoctor-pdf
 
 ### Convert to PDF
 
-> **Tip:** run the commands from `cairo/docs/reference`
+> **Tip:** run the commands from `docs/reference` (from the repo root)
 
 **Convert a single file:**
 
 ```bash
-asciidoctor-pdf src/Summary.adoc
+asciidoctor-pdf src/components/cairo/modules/ROOT/pages/index.adoc
 ```
 
 **Convert all `.adoc` files:**
 
 ```bash
-asciidoctor-pdf src/*.adoc
+find src/components/cairo/modules -path '*/pages/*.adoc' -print0 | xargs -0 asciidoctor-pdf
 ```
 
 PDF files will be created next to the source `.adoc` files.
