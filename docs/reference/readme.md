@@ -38,7 +38,7 @@ sudo apt-get install asciidoctor
 
 ### Convert to HTML
 
-> **Tip:** run the commands from `docs/reference` (from the repo root)
+> **Tip:** run the commands from `docs/reference`
 
 **Convert a single file:**
 
@@ -78,7 +78,7 @@ sudo gem install asciidoctor-pdf
 
 ### Convert to PDF
 
-> **Tip:** run the commands from `docs/reference` (from the repo root)
+> **Tip:** run the commands from `docs/reference`
 
 **Convert a single file:**
 
