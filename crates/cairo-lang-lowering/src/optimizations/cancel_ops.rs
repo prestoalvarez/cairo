@@ -262,10 +262,6 @@ impl<'db, 'a> CancelOpsContext<'db, 'a> {
                     self.stmts_to_remove.push(statement_location);
                     self.rename_var(stmt.original(), stmt.input.var_id);
                     stmt.input.var_id
-                } else if desnaps.is_empty()
-                    && self.lowered.variables[stmt.input.var_id].info.copyable.is_err()
-                {
-                    stmt.original()
                 } else {
                     stmt.input.var_id
                 };
