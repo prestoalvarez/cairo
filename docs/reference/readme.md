@@ -38,7 +38,7 @@ sudo apt-get install asciidoctor
 
 ### Convert to HTML
 
-> **Tip:** run the commands from `docs/reference`
+> **Tip:** `cd docs/reference`
 
 **Convert a single file:**
 
@@ -49,7 +49,7 @@ asciidoctor src/components/cairo/modules/ROOT/pages/index.adoc
 **Convert all `.adoc` files:**
 
 ```bash
-find src/components/cairo/modules -path '*/pages/*.adoc' -print0 | xargs -0 asciidoctor
+asciidoctor src/components/cairo/modules/*/pages/*.adoc
 ```
 
 HTML files will be created in the same directory as the source files.
@@ -78,7 +78,7 @@ sudo gem install asciidoctor-pdf
 
 ### Convert to PDF
 
-> **Tip:** run the commands from `docs/reference`
+> **Tip:** `cd docs/reference`
 
 **Convert a single file:**
 
@@ -89,7 +89,7 @@ asciidoctor-pdf src/components/cairo/modules/ROOT/pages/index.adoc
 **Convert all `.adoc` files:**
 
 ```bash
-find src/components/cairo/modules -path '*/pages/*.adoc' -print0 | xargs -0 asciidoctor-pdf
+asciidoctor-pdf src/components/cairo/modules/*/pages/*.adoc
 ```
 
 PDF files will be created next to the source `.adoc` files.
